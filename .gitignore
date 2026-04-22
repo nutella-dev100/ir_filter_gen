@@ -1,0 +1,17 @@
+# Python internals
+__pycache__/
+*.py[cod]
+
+# Data and Models (Usually too large for GitHub)
+data/
+dataset/
+*.pkl
+*.csv
+*.pt
+
+# Results/Logs
+results/*.txt
+
+# Environments
+venv/
+.env
