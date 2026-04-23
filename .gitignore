@@ -6,6 +6,7 @@ __pycache__/
 data/
 dataset/
 *.pkl
+!processed/*.pkl
 *.csv
 *.pt
 
