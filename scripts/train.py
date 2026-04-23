@@ -38,7 +38,7 @@ word2id, id2word = build_vocab_from_data(train_struct)
 # =====================
 # MODEL
 # =====================
-model = make_model(spec_dim=3, vocab=len(word2id)).to(DEVICE)
+model = make_model(spec_dim=5, vocab=len(word2id)).to(DEVICE)
 
 optimizer = optim.Adam(model.parameters(), lr=LR)
 criterion = LabelSmoothingLoss(len(word2id))

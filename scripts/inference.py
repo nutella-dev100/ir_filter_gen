@@ -11,7 +11,7 @@ checkpoint = torch.load("model.pt", map_location=DEVICE)
 word2id = checkpoint["word2id"]
 id2word = checkpoint["id2word"]
 
-model = make_model(spec_dim=3, vocab=len(word2id)).to(DEVICE)
+model = make_model(spec_dim=5, vocab=len(word2id)).to(DEVICE)
 model.load_state_dict(checkpoint["model"])
 model.eval()
 
@@ -179,9 +179,31 @@ for idx in range(min(5, len(spec_data))):
     greedy_pred = greedy_decode(model, spec, word2id, id2word, device=DEVICE)
     beam_results = beam_decode(model, spec, word2id, id2word,
                                beam_size=BEAM_SIZE, device=DEVICE)
+    
+    R = spec[0]
+    T = spec[1]
+
+    Dip = spec[2]*10 + 60
+    FOM = spec[3]*300
+
+    substrate_inv = {
+        0: "BK7",
+        1: "CaF2"
+    }
+
+    substrate = substrate_inv[int(round(spec[4]))]
 
     print(f"\n[Sample {idx}]")
-    print(f"  Spectrum (R, T, substrate)  : {spec}")
+
+    print(
+        f"  Inputs: "
+        f"R={R:.4f}, "
+        f"T={T:.4f}, "
+        f"Dip={Dip:.2f}, "
+        f"FOM={FOM:.2f}, "
+        f"Substrate={substrate}"
+    )
+
     print(f"  True structure   : {true_tokens}")
     print(f"  Greedy decode    : {greedy_pred}  "
           f"(MAE={thickness_mae(greedy_pred, true_tokens):.2f} nm)")

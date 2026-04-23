@@ -159,36 +159,55 @@ class SpecEncoder(nn.Module):
     def __init__(self):
         super().__init__()
 
-        # Spectral part (R, T)
+        # -----------------------------------
+        # Continuous inputs:
+        # [R, T, Dip, FOM]
+        # -----------------------------------
         self.spec_fc = nn.Sequential(
-            nn.Linear(2, 128),
+            nn.Linear(4, 64),
+            nn.ReLU(),
+
+            nn.Linear(64,128),
             nn.ReLU()
         )
 
-        # Substrate embedding (2 types: BK7, CaF2)
-        self.substrate_emb = nn.Embedding(2, 16)
+        # -----------------------------------
+        # Substrate embedding
+        # BK7=0, CaF2=1
+        # -----------------------------------
+        self.substrate_emb = nn.Embedding(2,16)
 
-        # Combine both
+        # -----------------------------------
+        # Fuse physics + substrate
+        # -----------------------------------
         self.fc = nn.Sequential(
-            nn.Linear(128 + 16, 128),
+            nn.Linear(128+16,128),
             nn.ReLU()
         )
 
-    def forward(self, x):
+
+    def forward(self,x):
         """
-        x shape: (batch, 3)
-        x = [R, T, substrate_id]
+        x = [R,T,Dip,FOM,substrate]
+        shape: (batch,5)
         """
 
-        spec = x[:, :2]                 # (B,2)
-        substrate = x[:, 2].long()      # (B,)
+        # First four are continuous
+        spec = x[:, :4]
 
-        spec_feat = self.spec_fc(spec)          # (B,128)
-        sub_feat = self.substrate_emb(substrate)  # (B,16)
+        # Last column is substrate id
+        substrate = x[:,4].long()
 
-        combined = torch.cat([spec_feat, sub_feat], dim=-1)
+        spec_feat = self.spec_fc(spec)
 
-        return self.fc(combined)   # (B,128)
+        sub_feat = self.substrate_emb(substrate)
+
+        combined = torch.cat(
+            [spec_feat, sub_feat],
+            dim=-1
+        )
+
+        return self.fc(combined)
 
 
 def make_model(spec_dim, vocab):
