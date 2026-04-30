@@ -57,6 +57,7 @@ def beam_decode(model, spec_target, word2id, id2word,
                 tgt_mask = subsequent_mask(ys.size(1)).to(device)
                 out = model.decoder(model.embed(ys), memory, tgt_mask)
                 step_log_probs = model.generator(out[:, -1])  # (1, vocab)
+                step_log_probs[:, word2id['PAD']] = -1e9
 
                 topk_probs, topk_ids = step_log_probs[0].topk(beam_size)
 

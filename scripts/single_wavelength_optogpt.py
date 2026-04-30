@@ -398,7 +398,7 @@ def greedy_decode(model, spec_target, word2id, id2word,
     model.eval()
 
     # --- Safety check ---
-    assert len(spec_target) == 3, "Expected [R, T, substrate_id]"
+    assert len(spec_target) == 5, "Expected [R, T, substrate_id]"
 
     with torch.no_grad():
         src = torch.tensor(np.array([spec_target]), dtype=torch.float32).to(device)
