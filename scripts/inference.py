@@ -13,7 +13,7 @@ BEAM_SIZE  = 5
 # =====================
 # LOAD MODEL
 # =====================
-checkpoint = torch.load("model.pt", map_location=DEVICE)
+checkpoint = torch.load("models/model.pt", map_location=DEVICE)
 word2id = checkpoint["word2id"]
 id2word = checkpoint["id2word"]
 
