@@ -1,0 +1,61 @@
+cuda
+Loaded 28188 validation samples.
+
+Running greedy + beam search (beam_size=5) over all samples...
+
+============================================================
+VALIDATION RESULTS  (28188 samples)
+============================================================
+Greedy decode  ù Thickness MAE : 1.5269 nm
+Beam search    ù Thickness MAE : 1.5486 nm  (beam_size=5)
+Beam search    ù Material Acc. : 62.58%
+Beam search    ù Layer Count Err (mean abs): 0.0409 layers
+============================================================
+
+Sample predictions (first 5 validation samples):
+------------------------------------------------------------
+
+[Sample 0]
+  Inputs: R=0.1687, T=0.8313, Dip=63.90, FOM=59.48, Substrate=BK7
+  True structure   : ['Ag_27', 'SiO2_4', 'MoS2_1']
+  Greedy decode    : ['Ag_27', 'SiO2_1', 'FG_1']  (MAE=1.00 nm)
+  Beam search top-3:
+    [1] score=-3.520  MAE=1.33 nm  ['Ag_27', 'FG_1']
+    [2] score=-4.213  MAE=1.00 nm  ['Ag_27', 'SiO2_1', 'FG_1']
+    [3] score=-4.380  MAE=0.33 nm  ['Ag_27', 'SiO2_5', 'FG_1']
+
+[Sample 1]
+  Inputs: R=0.0809, T=0.9191, Dip=70.94, FOM=98.87, Substrate=CaF2
+  True structure   : ['Ag_34', 'TiO2_1', 'MoS2_3']
+  Greedy decode    : ['Ag_34', 'SiO2_10', 'FG_3']  (MAE=3.00 nm)
+  Beam search top-3:
+    [1] score=-4.543  MAE=0.33 nm  ['Ag_34', 'Si_2', 'FG_3']
+    [2] score=-4.669  MAE=0.67 nm  ['Ag_34', 'TiO2_3', 'FG_3']
+    [3] score=-4.782  MAE=3.00 nm  ['Ag_34', 'SiO2_10', 'FG_3']
+
+[Sample 2]
+  Inputs: R=0.4464, T=0.5536, Dip=63.87, FOM=173.08, Substrate=BK7
+  True structure   : ['Au_59', 'SiO2_8', 'Anti_7']
+  Greedy decode    : ['Au_59', 'SiO2_5', 'FG_3']  (MAE=2.33 nm)
+  Beam search top-3:
+    [1] score=-4.202  MAE=2.33 nm  ['Au_59', 'SiO2_5', 'FG_3']
+    [2] score=-4.331  MAE=2.00 nm  ['Au_59', 'SiO2_6', 'FG_3']
+    [3] score=-4.444  MAE=1.33 nm  ['Au_59', 'SiO2_8', 'FG_3']
+
+[Sample 3]
+  Inputs: R=0.0758, T=0.9242, Dip=70.37, FOM=256.57, Substrate=CaF2
+  True structure   : ['Ag_49', 'TiO2_2', 'Anti_1']
+  Greedy decode    : ['Ag_49', 'SiO2_1', 'FG_1']  (MAE=0.33 nm)
+  Beam search top-3:
+    [1] score=-4.089  MAE=1.00 nm  ['Ag_49', 'SiO2_5', 'FG_1']
+    [2] score=-4.415  MAE=0.33 nm  ['Ag_49', 'TiO2_1', 'FG_1']
+    [3] score=-4.550  MAE=0.33 nm  ['Ag_49', 'SiO2_1', 'FG_1']
+
+[Sample 4]
+  Inputs: R=0.0376, T=0.9624, Dip=64.62, FOM=83.48, Substrate=BK7
+  True structure   : ['Ag_34', 'Si_7', 'FG_3']
+  Greedy decode    : ['Au_42', 'Si_7', 'FG_3']  (MAE=2.67 nm)
+  Beam search top-3:
+    [1] score=-4.414  MAE=3.67 nm  ['Au_42', 'TiO2_10', 'FG_3']
+    [2] score=-4.535  MAE=2.67 nm  ['Au_42', 'Si_7', 'FG_3']
+    [3] score=-4.813  MAE=3.00 nm  ['Au_42', 'Si_6', 'MoS2_3']
