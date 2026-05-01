@@ -1,7 +1,7 @@
 ## Description
 
 **Transformer-based model for inverse design of infrared (IR) optical filters.**
-**Given target spectral characteristics — Reflectance (R), Transmittance (T), Dip, and Figure of Merit (FOM) — the model predicts multilayer thin-film structures.**
+**Given target spectral characteristics - Reflectance (R), Transmittance (T), Dip, and Figure of Merit (FOM) the model predicts multilayer thin-film structures.**
 
 ### Overview
 
@@ -22,3 +22,5 @@ Parameters at a single wavelength are not deterministic enough for an inverse de
 ### Acknowledgements
 
 This project is inspired by the OptoGPT framework for optical inverse design. It was an attempt at solving a narrower problem with a much smaller dataset and lesser compute.
+
+Find the original paper here - https://arxiv.org/abs/2304.10294
